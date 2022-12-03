@@ -26,12 +26,12 @@ class GenreRepository {
 
     var genreModel = GenreModel(
       objectId: '3PplSH1UZd',
-      typeString: 'Genre01',
+      // typeString: 'Genre01',
       // typeBoolean: true,
       // typeNumber: 1,
       // typeDateTime: DateTime.now(),
       // typeDateTime: DateTime(2022, 12, 1, 0, 0, 0),
-      // typeArray: ['a', '1'],
+      typeArray: ['a', '1'],
     );
     ParseObject genreParseObject = GenreEntity().toParse(genreModel);
     await genreParseObject.save();
