@@ -29,6 +29,27 @@ void genrePage() {
   // genreSearch.queryBuilderWhereEqualToSimpleColumn('typeBoolean', true);
   // genreSearch.queryBuilderWhereEqualToSimpleColumn('typeString', 'Genre01');
   // genreSearch.queryBuilderWhereEqualToSimpleColumn('typeNumber', 3);
-  genreSearch.queryBuilderWhereEqualToSimpleColumn(
-      'typeDateTime', DateTime(2022, 12, 02, 16, 42, 36, 243));
+  // genreSearch.queryBuilderWhereEqualToSimpleColumn(
+  //     'typeDateTime', DateTime(2022, 12, 5, 9, 35));
+  // genreSearch.queryBuilderWhereNotEqualToSimpleColumn('typeNumber', 2);
+  // genreSearch.queryBuilderWhereGreaterThan('typeNumber', 2);
+  // genreSearch.queryBuilderWhereGreaterThan(
+  //     'typeDateTime', DateTime(2022, 12, 5, 9, 35));
+  // genreSearch.queryBuilderWhereGreaterThanOrEqualsTo('typeNumber', 2);
+  // genreSearch.queryBuilderWhereGreaterThanOrEqualsTo(
+  //     'typeDateTime', DateTime(2022, 12, 5, 9, 35));
+  // genreSearch.queryBuilderWhereLessThan('typeNumber', 2);
+  // genreSearch.queryBuilderWhereLessThan(
+  //     'typeDateTime', DateTime(2022, 12, 5, 9, 35));
+  // genreSearch.queryBuilderWhereLessThanOrEqualTo('typeNumber', 2);
+  // genreSearch.queryBuilderWhereLessThanOrEqualTo(
+  //     'typeDateTime', DateTime(2022, 12, 5, 9, 35));
+  // genreSearch.queryBuilderWhereValueExists('typeString', true);
+  // genreSearch.queryBuilderWhereStartsWith('typeString', 's');
+  // genreSearch.queryBuilderWhereEndsWith('typeString', '2');
+  // genreSearch.queryBuilderWhereContains('typeString', '0');
+  // genreSearch.queryBuilderWhereContainedIn('typeArray', ['a', '3']);
+  // genreSearch.queryBuilderWhereArrayContainsAll('typeArray', ['a', '1']);
+  // genreSearch.queryBuilderOr();
+  genreSearch.queryBuilderCustom();
 }

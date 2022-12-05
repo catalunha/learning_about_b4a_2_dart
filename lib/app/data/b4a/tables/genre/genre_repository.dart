@@ -38,7 +38,7 @@ class GenreRepository {
   }
 
   addAll() async {
-    removeAll();
+    await removeAll();
     log('+++ addAll +++');
     var genreModelList = <GenreModel>[];
     genreModelList.addAll([
@@ -70,7 +70,7 @@ class GenreRepository {
     }
   }
 
-  removeAll() async {
+  Future<void> removeAll() async {
     log('+++ removeAll +++');
 
     final apiResponse = await ParseObject(GenreEntity.className).getAll();
