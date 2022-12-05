@@ -1,0 +1,133 @@
+import 'dart:developer';
+
+import 'package:learning_about_b4a_2_dart/app/core/models/author_model.dart';
+import 'package:learning_about_b4a_2_dart/app/core/models/genre_model.dart';
+import 'package:learning_about_b4a_2_dart/app/data/b4a/entity/author_entity.dart';
+import 'package:learning_about_b4a_2_dart/app/data/b4a/entity/genre_entity.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
+
+class AuthorRepository {
+  AuthorRepository() {
+    log('=== AuthorRepository ===');
+  }
+  addAll() async {
+    log('+++ addAll +++');
+    await removeAll();
+    var authorModelList = <AuthorModel>[];
+    authorModelList.addAll([
+      AuthorModel(
+        typeString: 'Author01',
+        typeBoolean: true,
+        typeNumber: 1,
+        typeDateTime: DateTime.now(),
+        typeArray: ['a', '1'],
+        typePointerGenre: GenreModel(objectId: 'Qhk8ihK9qH'),
+      ),
+      AuthorModel(
+        typeString: 'Author02',
+        typeBoolean: false,
+        typeNumber: 2,
+        typeDateTime: DateTime.now().add(Duration(hours: 1)),
+        typeArray: ['b', '2'],
+        // typePointerGenre: GenreModel(objectId: 'mrsMiyXeuP'),
+      ),
+      AuthorModel(
+        typeString: 'Author03',
+        typeBoolean: true,
+        typeNumber: 3,
+        typeDateTime: DateTime.now().add(Duration(hours: 2)),
+        typeArray: ['c', '3'],
+        // typePointerGenre: GenreModel(objectId: 'w7n72uFBv2'),
+      ),
+    ]);
+    for (var authorModel in authorModelList) {
+      log('addSimpleData ${authorModel.typeString}');
+      ParseObject authorParseObject = AuthorEntity().toParse(authorModel);
+      await authorParseObject.save();
+    }
+  }
+
+  addPointer() async {
+    // log('addPointer 01');
+    // final parseObjectAuthor01 = ParseObject(AuthorEntity.className);
+    // parseObjectAuthor01.objectId = 'fK4I00NlBy';
+    // final parseObjectGenre01 = ParseObject(GenreEntity.className);
+    // parseObjectGenre01.objectId = 'kyCtliyFaK';
+    // parseObjectAuthor01.set('typePointerGenre', parseObjectGenre01);
+    // await parseObjectAuthor01.save();
+
+    // log('addPointer 02');
+    // final parseObjectAuthor02 = ParseObject(AuthorEntity.className);
+    // parseObjectAuthor02.objectId = 's3wDYlIqoV';
+    // parseObjectAuthor02.set(
+    //     'typePointerGenre',
+    //     (ParseObject(GenreEntity.className)..objectId = 'NUg5bhrvvq')
+    //         .toPointer());
+    // await parseObjectAuthor02.save();
+
+    log('addPointer 03');
+    final parseObjectAuthor03 = ParseObject(AuthorEntity.className);
+    parseObjectAuthor03.objectId = 'atiOoylOI1';
+    final parseObjectGenre03 = ParseObject(GenreEntity.className);
+    parseObjectGenre03.objectId = 'WX2QRHMhD2';
+    parseObjectAuthor03.set('typePointerGenre', parseObjectGenre03);
+    await parseObjectAuthor03.save();
+  }
+
+  add() async {
+    var authorModel = AuthorModel(
+      typeString: 'Author04',
+      typeBoolean: false,
+      typeNumber: 4,
+      typeDateTime: DateTime.now().add(Duration(hours: 23)),
+      typeArray: ['d', '4'],
+      // typePointerGenre: GenreModel(objectId: 'bxirK4sWKU'),
+    );
+    ParseObject authorParseObject = AuthorEntity().toParse(authorModel);
+    await authorParseObject.save();
+  }
+
+  update() async {
+    var authorModel = AuthorModel(
+      objectId: '',
+      typeString: 'Author04',
+      typeBoolean: false,
+      typeNumber: 4,
+      typeDateTime: DateTime.now().add(Duration(hours: 23)),
+      typeArray: ['d', '4'],
+      // typePointerGenre: GenreModel(objectId: 'bxirK4sWKU'),
+    );
+    ParseObject authorParseObject = AuthorEntity().toParse(authorModel);
+    await authorParseObject.save();
+  }
+
+  unset(String objectId, String columnName) async {
+    final parseObject = ParseObject(AuthorEntity.className);
+    parseObject.objectId = objectId;
+    await parseObject.unset(columnName);
+    // É sempre parseResponse.success=true
+    // mesmo que coluna ja esteja undefined, ou
+    // nome da coluna esteja errado.
+    // print('parseResponse.count: ${parseResponse.count}');
+    // print('parseResponse.error: ${parseResponse.error}');
+    // print('parseResponse.results: ${parseResponse.results}');
+    // print('parseResponse.statusCode: ${parseResponse.statusCode}');
+    // print('parseResponse.success: ${parseResponse.success}');
+  }
+
+  delete(String objectId) async {
+    final parseObject = ParseObject(GenreEntity.className);
+    parseObject.objectId = objectId;
+    await parseObject.delete();
+  }
+
+  Future<void> removeAll() async {
+    final apiResponse = await ParseObject(AuthorEntity.className).getAll();
+
+    if (apiResponse.success && apiResponse.results != null) {
+      for (ParseObject element in apiResponse.results!) {
+        await element.delete();
+      }
+    }
+  }
+}
